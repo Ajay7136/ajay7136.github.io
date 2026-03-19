@@ -1,90 +1,85 @@
-# Manga Portfolio — Django Integration Guide
+# ⚡ Manga Portfolio — Ajay | Python & Django Developer
 
-This Manga-style portfolio is a responsive, animation-heavy frontend built with pure HTML, CSS, and JS (GSAP). It is structured modularly so it can be directly integrated into your Python Django backend.
+> *"SELECT * FROM skills WHERE level > 'LEGENDARY'"*
 
-## 1. Move Static Assets
+A manga-inspired developer portfolio built with pure **HTML, CSS, and JavaScript**. Every section is designed like a comic book panel — bold typography, speed lines, halftone textures, and dramatic SFX transitions.
 
-Copy the contents of the `static` folder directly into your Django project's static directory. 
+🔗 **Live:** [ajay7136.github.io](https://ajay7136.github.io)
 
-If you have an app named `portfolio`:
+---
+
+## 🎨 Design
+
+The entire site is styled as a manga comic — no frameworks, no templates, just hand-crafted CSS:
+
+- **Comic panel layouts** with thick black borders and box shadows
+- **Speed line backgrounds** using CSS `repeating-conic-gradient`
+- **Halftone dot textures** via `radial-gradient` patterns
+- **SFX separators** (*BOOM!*, *KA-POW!*, *WHAM!!*) between sections
+- **Scroll-triggered animations** powered by GSAP & ScrollTrigger
+- **JoJo-style "To Be Continued"** footer with animated arrow
+
+## 🗂️ Sections
+
+| Section | Style |
+|---------|-------|
+| **Hero** | Full-width manga splash page with character art & speech bubble |
+| **Projects** | 2-column comic grid — each project is a panel with radial/diagonal backgrounds |
+| **Skills** | Power-level progress bars with striped fills & circular badges |
+| **Contact** | Manga CTA with `mailto:` link, "WHOOSH!" SFX, & social cards |
+| **Footer** | JoJo's Bizarre Adventure inspired "To Be Continued →" banner |
+
+## 🛠️ Tech Stack
+
+| Tech | Usage |
+|------|-------|
+| **HTML5** | Semantic structure |
+| **CSS3** | Manga aesthetic — borders, gradients, halftones, animations |
+| **JavaScript** | Scroll interactions |
+| **GSAP + ScrollTrigger** | Entrance animations & parallax effects |
+| **Google Fonts** | Bangers, Permanent Marker, Oswald, Comic Neue, Fira Code |
+
+## 📁 Structure
+
+```
+Portfolio/
+├── index.html              # Main page
+├── static/
+│   ├── css/
+│   │   └── style.css       # All manga styles
+│   ├── js/
+│   │   └── app.js          # GSAP animations
+│   └── images/
+│       ├── manga_char.png      # Main character illustration
+│       ├── manga_chibi.png     # Navbar logo
+│       ├── manga_keyboard.png  # Keyboard prop
+│       └── coding.png          # Terminal illustration
+└── README.md
+```
+
+## 🚀 Run Locally
+
+Just open `index.html` in your browser — no build step, no dependencies:
+
 ```bash
-cp -r static/css your_django_project/portfolio/static/portfolio/css
-cp -r static/js your_django_project/portfolio/static/portfolio/js
+# Clone the repo
+git clone https://github.com/Ajay7136/Ajay7136.github.io.git
+
+# Open it
+open index.html
+# or on Linux
+xdg-open index.html
 ```
 
-## 2. Implement the Template
+## 📬 Contact
 
-Place the `index.html` into your Django `templates` directory (`your_django_project/portfolio/templates/portfolio/index.html`). 
+- **Email:** [ajaylingam1999@gmail.com](mailto:ajaylingam1999@gmail.com)
+- **GitHub:** [github.com/AjayNiven](https://github.com/AjayNiven)
+- **LinkedIn:** [linkedin.com/in/ajay-r-a401a5194](https://www.linkedin.com/in/ajay-r-a401a5194/)
 
-### Update the Template to use Django Tags
+---
 
-Add the `{% load static %}` tag at the very top of your HTML file, and wrap your CSS/JS paths:
-
-```html
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- ... -->
-    <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}">
-</head>
-<body>
-    <!-- ... content ... -->
-    <script src="{% static 'portfolio/js/app.js' %}"></script>
-</body>
-</html>
-```
-
-## 3. Dynamic Data Models
-
-You can convert the static sections into dynamic ones by passing Context data from your `views.py`.
-
-### Example `models.py`
-```python
-from django.db import models
-
-class Project(models.Model):
-    title = models.CharField(max_length=150)
-    tech_stack = models.CharField(max_length=200, help_text="Comma separated e.g. Django, React, Redis")
-    description = models.TextField()
-    sfx = models.CharField(max_length=20, default="BAM!")
-
-class Experience(models.Model):
-    years = models.CharField(max_length=50) # '2020 - 2023'
-    title = models.CharField(max_length=150)
-    description = models.TextField()
-```
-
-### Example `views.py`
-```python
-from django.shortcuts import render
-from .models import Project, Experience
-
-def index(request):
-    return render(request, 'portfolio/index.html', {
-        'projects': Project.objects.all(),
-        'experiences': Experience.objects.order_by('-id')
-    })
-```
-
-### Example Template Loop (Projects)
-In `index.html`, replace the hardcoded "Mission Episodes" with a loop:
-
-```html
-{% for project in projects %}
-<section class="panel project-panel">
-    <div class="sfx" style="top: 10px; right: 10px;">{{ project.sfx }}</div>
-    
-    <h2 class="title" style="font-size: 2rem;">Episode {{ forloop.counter }}: {{ project.title }}</h2>
-    
-    <div style="margin-bottom: 1rem;">
-        <span class="tech-badge">{{ project.tech_stack }}</span>
-    </div>
-    
-    <p>{{ project.description }}</p>
-    <a href="#" class="manga-btn" style="font-size: 1rem; margin-top: 1rem;">Read Chapter</a>
-</section>
-{% endfor %}
-```
-
-Enjoy your performant, deeply aesthetic Manga portfolio app powered by Django!
+<p align="center">
+  <i>This portfolio was crafted with ⚡ <b>Antigravity</b> vibe coding skills</i><br>
+  <sub>© 2026 Ajay — All arcs reserved.</sub>
+</p>
